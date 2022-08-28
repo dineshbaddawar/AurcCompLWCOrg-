@@ -1,0 +1,138 @@
+<template>
+        
+     <lightning-card title="Contact Record Based on Lead Email and Phone" icon-name="standard:contact">
+         <div class="slds-m-around_medium slds-box slds-theme_default">
+             <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                 <thead>
+                     <tr>
+                         <th class="" scope="col">
+                             <div class="slds-truncate " title="Contact Name">Name</div>
+                         </th>
+                         <th class="" scope="col">
+                             <div class="slds-truncate" title="Contact Email">Email</div>
+                         </th>
+                         <th class="" scope="col">
+                              <div class="slds-truncate" title="Contact Phone">Phone</div>
+                          </th>
+                     </tr>
+                 </thead>
+                 
+                 <tbody>
+                     
+                     <template for:each={ContactRecordData} for:item="contact">
+                         <!-- <tr key={contact.Id}>
+                              <td>  <a data-id="myFocussedLink" onclick={navigateToContactPage} >{contact.Name}</a>
+                              </td>
+                              <td>{contact.Email}</td>
+                              </tr> -->
+                         <tr key={contact.Id}>
+                             <td>
+                                 <a key={contact.id} class="slds-col">
+                                     <lightning-tile class="slds-truncate "
+                                                     label={contact.Name}
+                                                     href={contact.Url}></lightning-tile>
+                                 </a>
+                             </td>
+                             <td>{contact.Email}</td>
+                             <td>{contact.Phone}</td>
+                         </tr>
+                         
+                     </template>
+                     
+                 </tbody>
+                 
+             </table>
+         </div>
+     </lightning-card>
+     <br/>
+     
+     <lightning-card title="Opportunity Record Based on Lead Email and Phone" icon-name="standard:opportunity">
+         <div class="slds-m-around_medium slds-box slds-theme_default">
+             <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                 <thead>
+                     <tr>
+                         <th class="" scope="col">
+                             <div class="slds-truncate slds-text-align_center" title="Opportunity Name">Name</div>
+                         </th>
+                         <th class="" scope="col">
+                             <div class="slds-truncate" title="Opportunity Email">Email</div>
+                         </th>
+                         <th class="" scope="col">
+                              <div class="slds-truncate" title="Opportunity Phone">Phone</div>
+                          </th>
+                     </tr>
+                 </thead>
+                 
+                 <tbody>
+                     <template for:each={OpportunityRecordData} for:item="opp">
+                         <!-- <tr key={opp.Id}> -->
+                         <!-- <td>{opp.Name}</td> -->
+                         <!-- <td>  <a data-id="myFocussedLink"  onclick={navigateToOpportunityPage} >{opp.Name}</a> </td> -->
+                         <!-- <a href="{!'/one/one.app?#/sObject/'+ opp.Id + '/view'}" target="_blank">{! opp.Name }</a> -->
+                         <!-- <td>{opp.Email__c}</td> -->
+                         <!-- </tr> -->
+                         <!-- <a key={opp.id} class="slds-col">
+                         <lightning-tile class="slds-truncate slds-text-align_center"
+                         label={opp.Name}
+                         href={opp.Url}></lightning-tile>
+                         </a> -->
+                         <tr key={opp.Id}>
+                             <td>
+                                 <a key={opp.id} class="slds-col">
+                                     <lightning-tile class="slds-truncate slds-text-align_center "
+                                                     label={opp.Name}
+                                                     href={opp.Url}></lightning-tile>
+                                 </a>
+                             </td>
+                             <td>{opp.Email__c}</td>
+                             <td>{opp.Phone__c}</td>
+                         </tr>
+                     </template>
+                 </tbody>
+                 
+             </table>
+         </div>
+     </lightning-card>  
+     <br/>
+     
+     <lightning-card title="Account Record Based on Lead Email and Phone " icon-name="standard:account">
+         <div class="slds-m-around_medium slds-box slds-theme_default">
+             <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                 <thead>
+                     <tr>
+                         <th class="" scope="col">
+                             <div class="slds-truncate " title="Account Name">Name</div>
+                         </th>
+                         <th class="" scope="col">
+                             <div class="slds-truncate" title="Account Email">Email</div>
+                         </th>
+                         <th class="" scope="col">
+                              <div class="slds-truncate" title="Account Phone">Phone</div>
+                          </th>
+                     </tr>
+                 </thead>
+                 
+                 <tbody>
+                     
+                     <template for:each={AccountRecordData} for:item="acc">
+                         <tr key={acc.Id}>
+                             <td>
+                                 <a key={acc.id} class="slds-col">
+                                     <lightning-tile class="slds-truncate "
+                                                     label={acc.Name}
+                                                     href={acc.Url}></lightning-tile>
+                                 </a>
+                             </td>
+                             <td>{acc.Email__c}</td>
+                             <td>{acc.Phone}</td>
+                         </tr>
+                         
+                     </template>
+                     
+                 </tbody>
+                 
+             </table>
+         </div>
+     </lightning-card>
+     
+ </template>
