@@ -1,14 +1,12 @@
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="ToDoController">
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
     <aura:attribute name="recordId" type="String" />
-    
-    <aura:attribute name="todoColumns" type="List"/>
-    <aura:attribute name="todoData" type="Object"/>
     <aura:attribute name="today" type="Date" description="To set todays date as mimimum value for Due date and reminder date"/>
     <aura:attribute name="objToDo" type="To_Do__c" default="{'sobjectType': 'To_Do__c'}"/>
+    <aura:attribute name="objToDoList" type="To_Do__c[]"/>
+    <aura:attribute name="todoColumnsDataTable" type="List"/>
     
-    
-    <lightning:card title= "Add New Task">
+    <lightning:card title= "Add New Task" class="card1">
         <aura:set attribute="actions">
             <lightning:buttonicon iconName="utility:down"
                                   size="x-small"
@@ -45,14 +43,12 @@
                               onclick="{!c.saveTodo}"/>
         </div>
     </lightning:card>
-    
-    <div class="slds-m-vertical_large">
-        <p>Hello</p>
-        <lightning:datatable aura:id="tableId" title="Created Task"
-                             keyFideld="Id"
-                             columns="{!v.todoColoumns}"
-                             data="{!v.todoData}"
-                             hideCheckboxColumn="true"/>
+    <br/>
+    <div class="blue">
+        <lightning:card title="Created Task" iconName="standard:task" class="red">
+            <lightning:datatable  data="{!v.objToDoList}" columns="{!v.todoColumnsDataTable}" class="slds-badge" keyField="id" hideCheckboxColumn="true"/>
+        </lightning:card>
         
-    </div>	
+    </div>
+    
 </aura:component>

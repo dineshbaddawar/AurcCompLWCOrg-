@@ -6,6 +6,7 @@
  
  // For count the selected checkboxes. 
  checkboxSelect: function(component, event, helper) {
+     debugger;
   // get the selected checkbox value  
   var selectedRec = event.getSource().get("v.value");
   // get the selectedCount attrbute value(default is 0) for add/less numbers. 
@@ -23,6 +24,7 @@
  
  // For select all Checkboxes 
  selectAll: function(component, event, helper) {
+     debugger;
   //get the header checkbox value  
   var selectedHeaderCheck = event.getSource().get("v.value");
   // get all checkbox on table with "boxPack" aura id (all iterate value have same Id)
@@ -58,6 +60,7 @@
  },
  //For Delete selected records 
  deleteSelected: function(component, event, helper) {
+     debugger;
   // create var for store record id's for selected checkboxes  
   var delId = [];
   // get all checkboxes 

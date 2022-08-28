@@ -38,16 +38,13 @@
              {label:'Phone', fieldName: 'Phone__c', type:'text'},
             {label:'Email', fieldName: 'Email__c', type:'email'}
         ]);
-        
         var action = component.get("c.getOpportunityBEmailData");
         var oppEmail = component.get("v.leadEmailRec");
         var oppPhone = component.get("v.leadPhoneRec");
-        
         action.setParams({
             "emailId" : oppEmail,
             "oppPhone" : oppPhone
         })
-        
         action.setCallback(this, function(response){
             var State = response.getState();
             if(State === 'SUCCESS'){
@@ -58,29 +55,24 @@
                 component.set("v.OpportunityRecordData", data);
                 this.helperMethodAccount(component, event);
             }
-            
         });
          $A.enqueueAction(action);
     },
     
     helperMethodAccount :function (component,event,helper) {
-      
          component.set("v.myaccountcolumns",[
             {label: 'Account Name', fieldName: 'linkName', type: 'url',
              typeAttributes: {label: { fieldName: 'Name' }, target: '_blank'}},
              {label:'Phone', fieldName: 'Phone', type:'text'},
             {label:'Email', fieldName: 'Email__c', type:'email'}
         ]);
-        
         var action = component.get("c.getAccountByEmailData");
         var accEmail = component.get("v.leadEmailRec");
         var accPhone = component.get("v.leadPhoneRec");
-        
         action.setParams({
             "emailId" : accEmail,
             "accPhone" : accPhone
         })
-        
         action.setCallback(this, function(response){
             var State = response.getState();
             if(State === 'SUCCESS'){
@@ -92,7 +84,5 @@
             }
         });
         $A.enqueueAction(action);
-    },
-    
-               
+    },         
 })

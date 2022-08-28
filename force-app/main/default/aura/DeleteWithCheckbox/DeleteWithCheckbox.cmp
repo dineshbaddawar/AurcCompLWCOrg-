@@ -2,22 +2,23 @@
     <!--Declare Attributes-->  
     <aura:attribute name="ListOfContact" type="contact[]" />
     <aura:attribute name="selectedCount" type="integer" default="0"/>
-    
-    <!--aura init handler , call js "loadContactList" function on component load, and display contact data on table-->   
     <aura:handler name="init" value="{!this}" action="{!c.loadContactList}"/>
+    
     <!--Header part-->
-    <div class="slds-page-header">
-        <p class="slds-page-header__title slds-truncate" title="">Contact List With Checkbox Action</p>
-        <span class="slds-badge">Selected Contact:{!v.selectedCount}</span>
-        <div class="slds-grid slds-grid--align-end"> 
+    <lightning:card title="Contact List With Checkbox Action" iconName="standard:contact" class="slds-p-around_medium">
+   
+       
+       <h2 ><span class="slds-badge ;">Selected Contact:  <b> {!v.selectedCount} </b></span> </h2> 
+        <div class="slds-grid slds-grid--align-end slds-p-around_medium"> 
             <button class="slds-button slds-button--brand" onclick="{!c.deleteSelected}">Delete Contact</button>
-        </div>
-    </div>
+        </div> <br/>
+   
+    
     <!--contacts table part--> 
     <table class="slds-table slds-table--bordered slds-table--cell-buffer">
-        <thead>
+        <thead class="dinesh">
             <tr class="slds-text-title--caps">
-                <th style="width:3.25rem;" class="slds-text-align--right">
+                <th style="width:3.20rem;" class="slds-text-align--right">
                     <div class="slds-form-element">
                         <div class="slds-form-element__control">
                             <label class="slds-checkbox">
@@ -30,16 +31,10 @@
                     </div>
                 </th>
                 <th>
-                    <span  title="Sr No">Sr No</span>      
-                </th>
-                <th>
                     <span class="slds-truncate" title="Name">First Name</span>      
                 </th>
                 <th>
                     <span class="slds-truncate" title="Last Name">Last Name</span>
-                </th>
-                <th>       
-                    <span class="slds-truncate" title="Department">Department</span>
                 </th>
                 <th >
                     <div class="slds-truncate" title="MobilePhone">Mobile Phone</div>
@@ -62,18 +57,12 @@
                                 </label>
                             </div>
                         </div>
-                    </td>   {!i+1}
-                    <td scope="row">
-                        <div ><a>{!i+1}</a></div>
-                    </td>
+                    </td>  
                     <td scope="row">
                         <div class="slds-truncate" title="{!con.Name}"><a>{!con.FirstName}</a></div>
                     </td>
                     <td scope="row">
                         <div class="slds-truncate" title="{!con.LastName}">{!con.LastName}</div>
-                    </td>
-                    <td scope="row">
-                        <div class="slds-truncate" title="{!con.Department}">{!con.Department}</div>
                     </td>
                     <td scope="row">
                         <div class="slds-truncate" title="{!con.MobilePhone}">{!con.MobilePhone}</div>
@@ -82,4 +71,5 @@
             </aura:iteration>
         </tbody>
     </table>
+        </lightning:card>
 </aura:component>

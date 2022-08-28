@@ -1,5 +1,6 @@
 ({
  onLoad: function(component, event) {
+     debugger;
   console.log('onLoad call');
   //call apex class method
   var action = component.get('c.fetchContact');
@@ -18,6 +19,7 @@
  },
 
  deleteSelectedHelper: function(component, event, deleteRecordsIds) {
+      debugger;
   //call apex class method
   var action = component.get('c.deleteRecords');
   // pass the all selected record's Id's to apex method 
@@ -34,6 +36,7 @@
      alert('The following error has occurred. while Delete record-->' + response.getReturnValue());
     } else {
      console.log('check it--> delete successful');
+        
     }
     // call the onLoad function for refresh the List view    
     this.onLoad(component, event);

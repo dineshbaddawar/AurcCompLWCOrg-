@@ -7,27 +7,7 @@
         var today = fullYear + '-' + month + '-' + date;
         component.set("v.today", today);
         
-        component.set("v.todoColumns",[
-            {
-                label:'Description',
-                fieldName : 'linkToRecord',
-                type:'url',
-                typeAttributes:{label:{fieldName:'Description__c'},target:'_blank'}
-            },
-            {
-                label :'Due Date',
-                fieldName:'Due_Date__c',
-                type:'date',
-                typeAttributes:{day:'2-digit',month:'long',year:'2-digit'}
-            },
-            {
-                label:'Reminder Date',
-                fieldName:'Reminder_Date__c',
-                type:'date',
-                typeAttributes:{day:'2-digit',month:'long',year:'2-digit'}
-            }
-        ]);
-        
+       
         helper.getData(component,event,helper);
     },
     

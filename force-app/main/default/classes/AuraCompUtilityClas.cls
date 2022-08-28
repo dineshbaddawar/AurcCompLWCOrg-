@@ -297,18 +297,16 @@ public class AuraCompUtilityClas {
     @AuraEnabled
     public Static List<Contact> getContactsByEmail(String emailId, String conPhone){
         System.debug('emailId---:'+emailId+' conPhone-----> '+conPhone);
-      //  List<Contact> conList = [SELECT Id,Email,Name,Phone FROM Contact WHERE (Email =:emailId OR Phone =:conPhone)];
-        // List<Contact> conList = [SELECT Id, Email, Name, Phone FROM Contact WHERE (email !=null or phone !=null) AND (phone !=null OR email !=null) AND (email =:emailId OR email  =:conPhone)];
-         List<Contact> conList =   [SELECT Id,Email,Name,Phone FROM Contact WHERE (email =:emailId OR Phone =:conPhone)];
-         System.debug('conList--->'+conList[0].Email);
-         System.debug('conList--->'+conList);
+        List<Contact> conList =   [SELECT Id,Email,Name,Phone FROM Contact WHERE (email =:emailId OR Phone =:conPhone)];
+        System.debug('conList--->'+conList[0].Email);
+        System.debug('conList--->'+conList);
         return conList;
     }
     
     @AuraEnabled
     Public Static List<Opportunity> getOpportunityBEmail(String emailId, String oppPhone){
         List<opportunity>  oppList = [SELECT Id,Email__c,Name,Phone__c FROM Opportunity WHERE (Email__c =:emailId OR Phone__c =:oppPhone)];
-         System.debug('oppList--->'+oppList);
+        System.debug('oppList--->'+oppList);
         return oppList;
     }
     
@@ -318,22 +316,61 @@ public class AuraCompUtilityClas {
         System.debug('accList- Method-->'+accList);
         return accList;
     }
-
-// ==================================================================================================================================
-
-// Account & their related Contacts using Aura Component
-
-@AuraEnabled
-public Static Account AccountwithRelatedContacts(String accountId){
-    List<Account> accList = [SELECT Id,Name,Email__c,Phone FROM Account WHERE Id =:accountId LIMIT 1] ;
-    return accList[0];
-
-}
-
-@AuraEnabled
-Public Static List<Contact> contactWithAccountId(String AccountId){
-    List<Contact> conList = [SELECT Id,Email,AccountId,Phone,Name FROM Contact WHERE AccountId =: AccountId];
-    return conList;
-}
-
+    
+    // ==================================================================================================================================
+    
+    // Account & their related Contacts using Aura Component
+    
+    @AuraEnabled
+    public Static Account AccountwithRelatedContacts(String accountId){
+        try{
+            List<Account> accList = [SELECT Id,Name,Email__c,Phone FROM Account WHERE Id =:accountId LIMIT 1] ;
+            return accList[0];
+        }catch(Exception e){
+            System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNumber());
+            return null;
+        }
+        
+        
+    }
+    
+    @AuraEnabled
+    Public Static List<Contact> contactWithAccountId(String AccountId){
+        List<Contact> conList = [SELECT Id,Email,AccountId,Phone,Name FROM Contact WHERE AccountId =: AccountId];
+        return conList;
+    }
+    
+    /* Try Catch Code
+     try{
+            
+        }catch(Exception e){
+            System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNumber());
+        }
+ 
+      */
+    
+      // ==================================================================================================================================
+      
+    // Delete Multiple Records Using Checkbox Controller
+    
+  
+    @AuraEnabled
+    public static List<Lead> featchLeadData() {
+    //Returning list of leads.
+        return [SELECT Id, Name,Company,Status,Phone,Email FROM Lead LIMIT 10];
+    }
+      
+     @AuraEnabled
+    public static void DeleteRecord(List<Lead> DeleteIds) {
+        List<Lead> delacccon = new List<Lead>();
+        for(Lead con : [SELECT Id, Name,Company,Status,Phone,Email FROM Lead WHERE Id IN : DeleteIds]){
+            delacccon.add(con);
+        }
+         
+        if(delacccon.size() > 0){
+            Delete  delacccon;
+        }
+         
+    }
+    
 }
