@@ -1,0 +1,4 @@
+<aura:component controller="AuraCompUtilityClas" >
+    <aura:attribute name="keyList" type="List"/>
+    <aura:attribute name="playerMap" type="Map"/>
+</aura:component>

@@ -42,7 +42,7 @@ global with sharing class AuraComponentLead {
     
     @AuraEnabled
     public Static List<Opportunity> getOppDetails(String conEmail, String conPhone){
-        List<Opportunity> oppList = [SELECT Id,Email__c,Phone__c,Name,AccountId,Account.Name FROM Opportunity WHERE (Email__c =:conEmail OR Phone__c =:conPhone)];
+        List<Opportunity> oppList = [SELECT Id,Email__c,Phone__c,Name,AccountId,Account.Name FROM Opportunity WHERE (Email__c =:conEmail OR Phone__c =:conPhone) LIMIT 10];
         return oppList;
     }
     

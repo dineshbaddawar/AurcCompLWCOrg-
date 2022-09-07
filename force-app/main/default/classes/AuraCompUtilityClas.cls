@@ -341,36 +341,76 @@ public class AuraCompUtilityClas {
     }
     
     /* Try Catch Code
-     try{
-            
-        }catch(Exception e){
-            System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNumber());
-        }
- 
-      */
+try{
+
+}catch(Exception e){
+System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNumber());
+}
+
+*/
     
-      // ==================================================================================================================================
-      
+    // ==================================================================================================================================
+    
     // Delete Multiple Records Using Checkbox Controller
     
-  
+    
     @AuraEnabled
     public static List<Lead> featchLeadData() {
-    //Returning list of leads.
+        //Returning list of leads.
         return [SELECT Id, Name,Company,Status,Phone,Email FROM Lead LIMIT 10];
     }
-      
-     @AuraEnabled
+    
+    @AuraEnabled
     public static void DeleteRecord(List<Lead> DeleteIds) {
         List<Lead> delacccon = new List<Lead>();
         for(Lead con : [SELECT Id, Name,Company,Status,Phone,Email FROM Lead WHERE Id IN : DeleteIds]){
             delacccon.add(con);
         }
-         
+        
         if(delacccon.size() > 0){
             Delete  delacccon;
         }
-         
+        
+    }
+    
+    // =================================================================================================================
+    
+    // Controller Class For Custom File Upload Using Aura Components
+    
+    @AuraEnabled
+    public static Id SaveFile(Id parentId, String fileName, String base64Data, String contentType) {
+        System.debug('parentId ::'+parentId);
+        System.debug('fileName ::'+fileName);
+        System.debug('base64Data ::'+base64Data);
+        System.debug('ContentType ::'+fileName);
+        try{
+            base64Data = EncodingUtil.urlDecode(base64Data, 'UTF-8');
+            Attachment attach = new Attachment();
+            attach.parentId = parentId;
+            attach.Body = EncodingUtil.base64Decode(base64Data);
+            attach.Name = fileName;
+            attach.ContentType = contentType;
+            Insert attach;
+            System.debug('the Attach In LWC File ::'+attach);
+            return attach.Id;
+        }catch(Exception e){
+            System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNumber());
+            return null;
+        }
+    }
+    
+     // =================================================================================================================
+    
+    // Iterate map values in Salesforce Lightning component
+    @AuraEnabled
+    public static Map<String, String> FetchMapValues(){
+        Map<String, String> Map1 = new Map<String, String>();
+        Map1.put('IND','Virat Kohali');
+        Map1.put('END','Ben Stokes');
+        Map1.put('NZ','Kane Williamson');
+        Map1.put('AUS','Aaron Finch');
+        Map1.put('SA','Dean Elagar');
+        return Map1;
     }
     
 }
