@@ -1,4 +1,5 @@
 <aura:application extends="force:slds" >
    <!-- <c:AnimalCmp></c:AnimalCmp>  -->
-    <c:GetAccountDetails/>
+    <!-- <c:GetAccountDetails/> -->
+    <c:GetContactDetails/>
 </aura:application>

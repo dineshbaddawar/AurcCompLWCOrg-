@@ -1,0 +1,53 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false"  docType="html-5.0" controller="LoginController">
+<head>
+    <c:Libraries /> 
+   
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js">
+    </script>
+   
+   
+    <script> 
+    debugger;
+   
+    var reviewerId = '{!$CurrentPage.parameters.id}';
+  
+
+    </script>
+  
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:white !important;font-size: 14px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#/CP_HomePage">  
+                <apex:image url="{!$Resource.SiteLogo}" styleClass="logo" width="20%" height="10%" />
+            </a>
+            <button class="navbar-toggler float-end m-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars" />
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/ReviewerHome" ng-class="{activeColor:activeTab==0}" style="color: currentcolor;font-weight:bold;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/Rp_Projects" ng-class="{activeColor:activeTab==1}" style="color: currentcolor;font-weight:bold;">Project's</a>
+                    </li>	 
+                </ul>
+               
+                
+            </div>
+        </div>
+    </nav>
+    <div style="Margin-top: 1%;">
+        <div>
+
+            <ng-view>
+            </ng-view>
+        </div>
+    </div>
+</body>
+</apex:page>

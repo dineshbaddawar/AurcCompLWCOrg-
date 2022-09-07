@@ -5,6 +5,7 @@
             
             
             <c:Libraries ></c:Libraries>
+            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
             <style>
                 body {
                 background: rgb(93, 186, 248);
@@ -40,28 +41,40 @@
             
             
             <Script>
-                // var stieURL = "{!$Label.LoginSiteURL}";
+                var stieURL = "{!$Label.LoginSiteURL}";
                 var app = angular.module('app', []);
                 app.controller('formController', function ($scope) {
                 
-                // Method for Login
-                debugger;
+                
                 $scope.userName;
                 $scope.userPassword;
-                $scope.loginUser = function(){
-                LoginController.loginUser($scope.userName, $scope.userPassword, function(result, event){
+                $scope.loginPage = true;
                 
+                $scope.loginUser = function(){
+                debugger;
+                alert("Working Fine !!")
+                LoginController.loginUser($scope.userName, $scope.userPassword, function(result, event){
                 if(event.status && result !=null){
+                alert("Working Fine !!")
                 debugger;
                 Swal.fire(
                 '', 'Logged In Successfully', 'Success'
                 )
-                $scope.$apply();            
-                }
+                $scope.$apply();
+                debugger;
+                window.location.replace(stieURL + "ReviewerPortal?id=" + result + '#/ReviewerHome');                
+                }else{
+                Swal.fire({
+                icon: 'error',
+                title: 'Opps....!',
+                text: 'Please Enter the Correct Username & Password !'
                 })
                 }
                 
                 
+                }, { escape: false })
+                $scope.$apply();
+                }
                 });
             </Script>
         </head>
@@ -84,7 +97,7 @@
                             </div>
                             <div class="row" >
                                 <h6 class="text-center">
-                                    <b style="font-family: -webkit-body; color:rgb(43, 56, 65)">Welcome To Arjuna Naturals Portal</b>
+                                    <b style="font-family: -webkit-body; color:rgb(43, 56, 65)">Welcome To Dinesh Hub Portal</b>
                                 </h6>
                             </div>
                             <div class="row" >

@@ -10,6 +10,7 @@ public class LoginController {
                     Rev.Login_Hash_Code__c = Utility.generateRandomString();
                     Rev.Id = conRec[0].Id;
                     System.debug('The Hash Code Value');
+                    System.debug('the Con DATA::'+Rev);
                     update Rev;
                     return Rev;
                 }else{
