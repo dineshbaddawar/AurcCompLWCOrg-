@@ -65,9 +65,5 @@
             </div>
         </div>
     </lightning:card>
-    
-    <br/>
-    <lightning:card title="Dinesh Baddawar" class="slds-text-align_center">
-    
-    </lightning:card>
+   
 </aura:component>

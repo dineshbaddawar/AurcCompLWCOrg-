@@ -3,7 +3,7 @@
     <apiVersion>55.0</apiVersion>
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <label>ReviewerPortal</label>
+    <label>ReviewerHome</label>
     <packageVersions>
         <majorNumber>2</majorNumber>
         <minorNumber>3</minorNumber>

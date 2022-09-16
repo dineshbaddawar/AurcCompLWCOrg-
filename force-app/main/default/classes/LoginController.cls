@@ -1,5 +1,6 @@
 public class LoginController {
 
+    /*
      @RemoteAction
         public static contact loginUser(string userName, string password){
             try{
@@ -20,8 +21,38 @@ public class LoginController {
                 system.debug(e.getLineNumber()+'---error Message---'+e.getMessage());
                 return null;
             }   
-        }
+        } */
     
+    //==============================================================================================================================================
+    
+    
+     @RemoteAction
+    public static String loginUser(string userName, string password){
+        try{
+            List<Contact> conRec = [SELECT Name,Email,Password__c,Login_Hash_Code__c FROM Contact WHERE Email =:userName AND Password__c =:password LIMIT  1];
+            system.debug('conRec----'+conRec);
+            if(conRec.size() > 0 ){
+                String currentReviewId;
+                String hasCode;
+                currentReviewId = conRec[0].id;
+                Contact Rev = new Contact();
+                Rev.Login_Hash_Code__c = Utility.generateRandomString();
+                Rev.Id = currentReviewId;
+                hasCode = String.valueOf(Contact.Login_Hash_Code__c) ;
+                System.debug('The Hash Code Value');
+                update Rev;
+                 System.debug('The Hash Code Value '+Rev.Login_Hash_Code__c);
+                return Rev.Login_Hash_Code__c;
+            }else{
+                return null; 
+            }
+        }catch(exception e){
+            system.debug(e.getLineNumber()+'---error Message---'+e.getMessage());
+            return null;
+        }   
+    }
+    
+    //==============================================================================================================================================
     
         // Forgot Reset Application Portal
         @RemoteAction
