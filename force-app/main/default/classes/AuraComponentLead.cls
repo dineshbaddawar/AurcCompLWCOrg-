@@ -1,11 +1,11 @@
 global with sharing class AuraComponentLead {
    
-    // Controller for Contact , Opportunity & Account Based on Lead Emai OR Phone
+    // Controller for Contact , Opportunity Based on Lead Emai OR Phone
     
     @AuraEnabled
     Public Static Lead fetchLeadData(String recId){
         System.debug('recordId--->'+recId);
-        List<Lead> leadList = [SELECT Id,Email,Name,Phone FROM Lead WHERE (Email !=null OR Phone !=null)  AND Id =: recId LIMIT 10];
+        List<Lead> leadList = [SELECT Id,Email,Name,Phone FROM Lead WHERE (Email !=null OR Phone !=null)  AND Id =: recId];
         return leadList[0];
     }
     
@@ -32,32 +32,25 @@ global with sharing class AuraComponentLead {
         return accList;
     }
     
-    // =======================================================================================================================================================
-    
     // Controller for Finding Contact Record based on Lead Email OR Phone on Lead Record Detail Page, alos find Contact Related Account & Fidn Opportunity based on
     // Account Record on the Lead Record Detail Page.
     
     @AuraEnabled
     public Static Contact getContactData(String contactId){
-        Contact con = [SELECT Id,Name,Email,Phone FROM Contact WHERE (Email !=null OR Phone !=null) AND ID =:contactId LIMIT 1];
-        System.debug('con  ::'+con);
-        return con;
+        return [SELECT Id,Name,Email,Phone FROM Contact WHERE (Email !=null OR Phone !=null) AND ID =:contactId];
     }
     
     @AuraEnabled
     public Static List<Opportunity> getOppDetails(String conEmail, String conPhone){
-        List<Opportunity> oppList = [SELECT Id,Email__c,Phone__c,Name,AccountId,Account.Name FROM Opportunity WHERE (Email__c =:conEmail OR Phone__c =:conPhone) LIMIT 5];
-        System.debug('oppList ::'+oppList);
-         System.debug('oppList Email ::'+oppList[0].AccountId);
+        List<Opportunity> oppList = [SELECT Id,Email__c,Phone__c,Name,AccountId,Account.Name FROM Opportunity WHERE (Email__c =:conEmail OR Phone__c =:conPhone) LIMIT 10];
         return oppList;
     }
     
     @AuraEnabled
     public Static List<Account> getAccountDetails(String oppAccountId){
-        List<Account> accList = [SELECT Id,Name,Phone,Email__c FROM Account Where Id =:oppAccountId LIMIT 10];
+        List<Account> accList = [SELECT Id,Name,Phone FROM Account Where Id =:oppAccountId];
         System.debug('accList:::'+accList);
         return accList;
 
     }
-    
 }

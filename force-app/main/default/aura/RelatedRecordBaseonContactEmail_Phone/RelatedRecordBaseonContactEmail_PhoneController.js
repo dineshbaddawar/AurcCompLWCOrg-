@@ -1,6 +1,5 @@
 ({
 	doInit : function(component, event, helper) {
-        debugger;
 		var action = component.get("c.getContactData");
         var currentRecId = component.get("v.recordId");
         console.log("currentRecId::",currentRecId);

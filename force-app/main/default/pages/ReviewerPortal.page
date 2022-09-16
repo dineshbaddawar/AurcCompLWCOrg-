@@ -18,70 +18,36 @@
   
 </head>
 <body>
-    <div class="carousel-banner" style="background-size: cover;min-height: calc(100vh - 124px);align-items: center;display: flex;margin-top:-15px;">
-            <!-- <apex:image url="{!$Resource.Hero_IGSTC}" styleClass="img-fluid" /> -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-5">
-                        <h1>It's Time to Bring Your</h1>
-                        <h2>Ideas Alive</h2>
-                        <p>IGSTC intends to catalyse innovative centric R and D projects by synergising the strength of research
-                            institution and industry from India and Germany.</p>
-                        <a class="btn btn-success btn-sm" href="#">
-                            Let's Start
-                        </a>
-                    </div>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:white !important;font-size: 14px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#/CP_HomePage">  
+                <apex:image url="{!$Resource.SiteLogo}" styleClass="logo" width="20%" height="10%" />
+            </a>
+            <button class="navbar-toggler float-end m-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars" />
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/ReviewerHome" ng-class="{activeColor:activeTab==0}" style="color: currentcolor;font-weight:bold;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/Rp_Projects" ng-class="{activeColor:activeTab==1}" style="color: currentcolor;font-weight:bold;">Project's</a>
+                    </li>	 
+                </ul>
+               
+                
             </div>
         </div>
-        <div class="service">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4 mb-4">
-                        <h4>
-                           
-                        </h4>
-                        <p>Playing a proactive role in facilitating participation of industry in joint R and D projects</p>
-                    </div>
-                    <div class="col-4 mb-4">
-                        <h4>
-                            
-                        </h4>
-                        <p>Providing/assisting in mobilising resources to carry out industrial R and D projects</p>
-                    </div>
-                    <div class="col-4 mb-4">
-                        <h4>
+    </nav>
+    <div style="Margin-top: 1%;">
+        <div>
 
-                        </h4>
-                        <p>Providing individual advice to institutes and industries from both the countries on the possibilities
-                            of Indo-German cooperation and helping in the identification of suitable partners</p>
-                    </div>
-                    <div class="col-4 mb-4">
-                        <h4>
-                            Encouraging Partners
-                        </h4>
-                        <p>Encouraging public-private partnerships (PPP) to foster elements of research, development and innovation,
-                            and cultivating a culture of cooperation between science and industry</p>
-                    </div>
-                    <div class="col-4 mb-4">
-                        <h4>
-                            Nurturing Contacts
-                        </h4>
-                        <p>Nurturing contacts between young and mid-career scientists and technologists to develop a sense of
-                            mutual trust, partnership, leadership and entrepreneurship</p>
-                    </div>
-                    <div class="col-4 mb-4">
-                        <h4>
-                            Cooperative Development
-                        </h4>
-                        <p>Developing cooperation through the identification of scientists and scientific institutions of both
-                            the countries</p>
-                    </div>
-                    <div class="col-12 mb-4 text-end">
-                        <a href="#" class="btn btn-success btn-sm">Learn More</a>
-                    </div>
-                </div>
-            </div>
+            <ng-view>
+            </ng-view>
         </div>
+    </div>
 </body>
 </apex:page>
