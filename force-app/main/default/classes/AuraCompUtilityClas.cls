@@ -412,5 +412,35 @@ System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNum
         Map1.put('SA','Dean Elagar');
         return Map1;
     }
+
+       // =================================================================================================================
+
+       // Controller for Custom Lookup 
+
+    @AuraEnabled
+    public Static List<SobjectResult> getResults(String ObjectName, String fieldName, String value){
+        List<SobjectResult> SobjectResultList = new list<SobjectResult>();
+        for(Sobject ob: Database.query('SELECT Id, '+fieldName+' FROM '+ObjectName+' WHERE '+fieldName+' LIKE \'%' + value+ '%\'')){
+            String fieldValue = (String)ob.get(fieldName);
+            System.debug('fieldValue ::'+fieldValue);
+            SobjectResultList.add(new SobjectResult(fieldValue, ob.Id));
+            System.debug('SobjectResultList ::'+SobjectResultList);
+        }
+        return SobjectResultList;
+    }
+    
+    public Class SobjectResult{
+        @AuraEnabled
+        public String recName;
+        @AuraEnabled
+        public Id recId;
+        
+        public SobjectResult(String recNameTemp, Id recIdTemp){
+            recName= recNameTemp;
+            System.debug('recName ::'+recName);
+            recId = recIdTemp;
+            System.debug('recId ::'+recId);
+        }
+    }   
     
 }

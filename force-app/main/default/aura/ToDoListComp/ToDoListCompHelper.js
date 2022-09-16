@@ -31,7 +31,7 @@
                 var todoList = response.getReturnValue();
                 for(var i=0; i < todoList.length;i++){
                     // to make upper Case value
-                   todoList[i].Description__c = todoList[i].Description__c.toUpperCase();
+                   todoList[i].Description__c = todoList[i].Description__c;
                     todoList[i].linkToRecord = '/'+todoList[i].Id;
                     
                 }
