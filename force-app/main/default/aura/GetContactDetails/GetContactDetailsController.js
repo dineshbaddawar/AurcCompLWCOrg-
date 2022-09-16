@@ -11,5 +11,5 @@
             
         });
         $A.enqueueAction(action);
-	},
+	}
 })

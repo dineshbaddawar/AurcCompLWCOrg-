@@ -52,19 +52,17 @@
                 
                 $scope.loginUser = function(){
                 debugger;
-               
+                alert("Working Fine !!")
                 LoginController.loginUser($scope.userName, $scope.userPassword, function(result, event){
                 if(event.status && result !=null){
-              
+                alert("Working Fine !!")
                 debugger;
                 Swal.fire(
                 '', 'Logged In Successfully', 'Success'
                 )
                 $scope.$apply();
                 debugger;
-                var sitePrefix = window.location.href.includes('/apex') ? '/apex' : '/Reviewer';
-                 window.location.replace(window.location.origin +sitePrefix+"/ReviewerPortal?id="+result+"#/ReviewerHome"); 
-                <!--  window.location.replace(stieURL + "ReviewerPortal?id=" + result + '#/ReviewerHome');  -->               
+                window.location.replace(stieURL + "ReviewerPortal?id=" + result + '#/ReviewerHome');                
                 }else{
                 Swal.fire({
                 icon: 'error',
