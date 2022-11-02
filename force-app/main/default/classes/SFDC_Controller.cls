@@ -5,7 +5,7 @@ public class SFDC_Controller {
     @AuraEnabled
     public Static List<Contact> getContactList(){
         try{
-            List<Contact> conList = [SELECT Id,phone,Email,Name FROM Contact WHERE CREATEDDATE = TODAy LIMIT 10];
+            List<Contact> conList = [SELECT Id,phone,Email,Name FROM Contact WHERE CREATEDDATE = THIS_WEEK LIMIT 10];
             System.debug('the conList ::'+conList);
             return conList;
         }catch(Exception e){

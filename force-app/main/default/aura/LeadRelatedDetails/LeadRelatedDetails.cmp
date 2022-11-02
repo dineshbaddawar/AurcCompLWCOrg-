@@ -11,25 +11,26 @@
     <aura:attribute name="myopportunitycolumns" type="List"/>
     <aura:attribute name="myaccountcolumns" type="List"/>
     
+    <lightning:card title="Aura Comp" class="slds-m-around_medium">
    <div class="slds-m-around_medium slds-box slds-theme_default">
-    <lightning:card title="Contact Record Based on Lead Email and Phone" iconName="standard:contact">
+    <lightning:card title="Contact Record Based on Lead Email OR Phone" iconName="standard:contact">
         <lightning:datatable data="{!v.ContactRecordData}" columns="{!v.mycontactcolumns}" keyField="id" hideCheckboxColumn="true"/>
     </lightning:card>
     </div> 
     
      <div class="slds-m-around_medium slds-box slds-theme_default">
-    <lightning:card title="Opportunity Record Based on Lead Email and Phone" iconName="standard:opportunity">
+    <lightning:card title="Opportunity Record Based on Lead Email OR Phone" iconName="standard:opportunity">
         <lightning:datatable data="{!v.OpportunityRecordData}" columns="{!v.myopportunitycolumns}" keyField="id" hideCheckboxColumn="true"/>
     </lightning:card>
     </div>
     
    
      <div class="slds-m-around_medium slds-box slds-theme_default">
-    <lightning:card title="Account Record Based on Lead Email and Phone" iconName="standard:account">
+    <lightning:card title="Account Record Based on Lead Email OR Phone" iconName="standard:account">
         <lightning:datatable data="{!v.AccountRecordData}" columns="{!v.myaccountcolumns}" keyField="id" hideCheckboxColumn="true"/>
     </lightning:card>
     </div>  
-   
+   </lightning:card>
     
     
 </aura:component>

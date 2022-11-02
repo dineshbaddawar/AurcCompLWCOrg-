@@ -1,6 +1,6 @@
 trigger CaseTrigger on Case (before insert) {
 
-    /*
+    
     List<Account> accList = [SELECt Id,Name FROM Account];
      List<String> accName = new List<String>();
     for(Account acc : accList){
@@ -17,6 +17,10 @@ trigger CaseTrigger on Case (before insert) {
             can.AccountId = accList[0].id;
         }
     }
-*/
+
+    
+     /*  Trigger_Helper_Classes.tagAccountToCase(trigger.new);
+    Trigger_Helper_Classes.TagEntitlementProcessToCaseBeforeInsert(trigger.new);
+    */
     
 }

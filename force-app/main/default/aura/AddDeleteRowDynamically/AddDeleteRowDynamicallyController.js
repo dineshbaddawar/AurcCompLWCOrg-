@@ -27,7 +27,8 @@
         component.set("v.accountList", accountList);
     },
    
-    saveAccounts: function(component, event, helper) {      
+    saveAccounts: function(component, event, helper) {     
+        debugger;
         if (helper.validateAccountRecords(component, event)) {
             //Call Apex method and pass account list as a parameters
             var action = component.get("c.saveAccountList");

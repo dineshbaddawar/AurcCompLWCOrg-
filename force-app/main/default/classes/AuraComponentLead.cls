@@ -5,14 +5,15 @@ global with sharing class AuraComponentLead {
     @AuraEnabled
     Public Static Lead fetchLeadData(String recId){
         System.debug('recordId--->'+recId);
-        List<Lead> leadList = [SELECT Id,Email,Name,Phone FROM Lead WHERE (Email !=null OR Phone !=null)  AND Id =: recId LIMIT 10];
-        return leadList[0];
+        Lead leadList = [SELECT Id,Email,Name,Phone FROM Lead WHERE (Email !=null OR Phone !=null)  AND Id =: recId LIMIT 1];
+        System.debug('leadList ::'+leadList);
+        return leadList;
     }
     
     @AuraEnabled
     public Static List<Contact> getContactsByEmailData(String emailId, String conPhone){
         System.debug('emailId---:'+emailId+' conPhone-----> '+conPhone);
-         List<Contact> conList =   [SELECT Id,Email,Name,Phone FROM Contact WHERE (email =:emailId OR Phone =:conPhone) LIMIT 10];
+         List<Contact> conList =   [SELECT Id,Email,Name,Phone FROM Contact WHERE email =:emailId OR Phone =:conPhone  LIMIT 5];
          System.debug('conList--->'+conList[0].Email);
          System.debug('conList--->'+conList);
         return conList;
@@ -20,14 +21,14 @@ global with sharing class AuraComponentLead {
     
     @AuraEnabled
     Public Static List<Opportunity> getOpportunityBEmailData(String emailId, String oppPhone){
-        List<opportunity>  oppList = [SELECT Id,Email__c,Name,Phone__c FROM Opportunity WHERE (Email__c =:emailId OR Phone__c =:oppPhone) LIMIT 10];
+        List<opportunity>  oppList = [SELECT Id,Email__c,Name,Phone__c FROM Opportunity WHERE (Email__c =:emailId OR Phone__c =:oppPhone) LIMIT 5];
          System.debug('oppList--->'+oppList);
         return oppList;
     }
     
     @AuraEnabled 
     Public Static List<Account> getAccountByEmailData(String emailId, String accPhone){
-        List<Account> accList = [SELECT Id,Email__c,Name,Phone FROM Account WHERE (Email__c =:emailId OR Phone =:accPhone) LIMIT 10];
+        List<Account> accList = [SELECT Id,Email__c,Name,Phone FROM Account WHERE (Email__c =:emailId OR Phone =:accPhone) LIMIT 5];
         System.debug('accList- Method-->'+accList);
         return accList;
     }
@@ -59,5 +60,8 @@ global with sharing class AuraComponentLead {
         return accList;
 
     }
+    
+        // ==========================================================================================================================================================================
+
     
 }

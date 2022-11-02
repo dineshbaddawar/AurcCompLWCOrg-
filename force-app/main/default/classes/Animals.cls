@@ -14,4 +14,12 @@ public class Animals {
         }
 	return null;
     }
+    
+    public Static Lead GetleadReocords(){
+        User us = [SELECT Id,Name FROM User WHERE Name = 'Jarvis'];
+        Lead led = new Lead();
+        led.OwnerId =us.Id;
+        insert led;
+        return led;
+    }
 }

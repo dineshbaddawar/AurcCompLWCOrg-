@@ -8,7 +8,7 @@
     <aura:handler event="force:refreshView" action="{!c.doInit}"/>
     
     <div >
-        <lightning:card title="CRUD Operation" iconName="standard:contact">
+        <lightning:card title="CRUD Operation on Contact" class="slds-text-title--caps" iconName="standard:contact">
         <table class="slds-table slds-table--striped slds-table_bordered" >
             <thead>
                 

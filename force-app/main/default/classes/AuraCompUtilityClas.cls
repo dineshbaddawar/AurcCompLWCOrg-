@@ -2,7 +2,7 @@ public class AuraCompUtilityClas {
     
     
     // Dependent PickList Controller
-    
+    // Class : 1#
     @AuraEnabled
     public static Map<String, List<String>> getDependentMap(sObject objDetail, string contrfieldApiName,string depfieldApiName){
         String controllingField = contrfieldApiName.toLowerCase();
@@ -49,6 +49,7 @@ public class AuraCompUtilityClas {
         return objResults;
     }
     
+    // Class: 2#
     public static String decimalToBinary(Integer val) {
         String bits = '';
         while (val > 0) {
@@ -59,9 +60,10 @@ public class AuraCompUtilityClas {
         return bits;
     }
     
+    //        HandleException.CreateErrorMsg('ClassName', 'MethodName', Exception);
+    //        Class: 3#
     public static String base64ToBits(String validFor) {
         if (String.isEmpty(validFor)) return '';
-        
         String validForBits = '';
         
         for (Integer i = 0; i < validFor.length(); i++) {
@@ -79,7 +81,7 @@ public class AuraCompUtilityClas {
         'abcdefghijklmnopqrstuvwxyz' +
         '0123456789+/';
     
-    
+    // Class: #4
     private static List<PicklistEntryWrapper> wrapPicklistEntries(List<Schema.PicklistEntry> PLEs) {
         return (List<PicklistEntryWrapper>)
             JSON.deserialize(JSON.serialize(PLEs), List<PicklistEntryWrapper>.class);
@@ -96,20 +98,25 @@ public class AuraCompUtilityClas {
         
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     //  add Sorting in Lightning Data Table
     @AuraEnabled
     public static list<Account> getAccountList(){
-        List<Account> accList= [Select Id, Name, Phone, CreatedDate From Account Order By CreatedDate LIMIT 10];
-        if(accList != null && accList.size()>0){
-            return accList;
+        try{
+            List<Account> accList= [Select Id, Name, Phone, CreatedDate From Account Order By CreatedDate LIMIT 10];
+            if(accList != null && accList.size()>0){
+                return accList;
+            }
+        }Catch(Exception e){
+            System.debug('The Error ::'+e.getMessage() +' AND Error Line No :'+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'getAccountList', e);
         }
         return null;
     }
     
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     // DataTable with Row Add & Delete Action in Salesforce Lightning
     @AuraEnabled
@@ -117,7 +124,7 @@ public class AuraCompUtilityClas {
         insert accList;
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     
     // Display Radio Buttons Group In Horizontal View in Lightning Component
@@ -134,14 +141,14 @@ public class AuraCompUtilityClas {
         return options;
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     
     // Inline Editing Controller 
     // Calss 1
     @AuraEnabled
     Public Static List<Opportunity> getOpportunity(){
-        return [SELECT Id,Name,StageName,Amount, CloseDate FROM Opportunity LIMIT 10];
+        return [SELECT Id,Name,StageName,Amount, CloseDate FROM Opportunity WHERE CreatedDate = THIS_WEEK  LIMIT 10];
     }
     
     // Class 2
@@ -152,24 +159,31 @@ public class AuraCompUtilityClas {
             return true;
         }catch(Exception e){
             System.debug('The Error--->'+e.getMessage());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'updateOpportunity', e);
             return false;
         }
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     
     // Lightning Accordion
     @AuraEnabled
     public static List<Account> getAccounts(){
-        List<Account> accList = new List<Account>();
-        for(Account acc : [SELECT Id,Name,AccountNumber, AnnualRevenue, Description, Phone, Website FROM Account LIMIT 10]){
-            accList.add(acc);
+        try{
+            List<Account> accList = new List<Account>();
+            for(Account acc : [SELECT Id,Name,AccountNumber, AnnualRevenue, Description, Phone, Website FROM Account LIMIT 10]){
+                accList.add(acc);
+            }
+            return accList;
+        }catch(Exception e){
+            System.debug('The Error--->'+e.getMessage());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'getAccounts', e);
+            return null;
         }
-        return accList;
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     // Multi Select Picklist Controller
     
@@ -203,7 +217,7 @@ public class AuraCompUtilityClas {
         return plValues;
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     // Controller Class for Add Delete Row Dynamically 
     
@@ -212,7 +226,7 @@ public class AuraCompUtilityClas {
         insert accList;
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     // Add Multiple Child Records to Parent Object Controller
     
@@ -226,6 +240,7 @@ public class AuraCompUtilityClas {
             return totalList;
         }catch(Exception e){
             System.debug('The Error '+e.getMessage() +' Erron Line '+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'getContacts', e);
         }
         return null;
     }
@@ -243,11 +258,12 @@ public class AuraCompUtilityClas {
             update listContacts;
         }catch(Exception e){
             System.debug('The Error '+e.getMessage() +' Erron Line '+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'addParentAccount', e);
         }
         
     }
     
-    // ================================================================================================================================
+    // ==========================================================================================================================================================================
     
     //  Delete Multiple Records Using Checkbox Controller
     
@@ -280,7 +296,7 @@ public class AuraCompUtilityClas {
         return ErrorMsg;
     }
     
-    // ==================================================================================================================================
+    // ==========================================================================================================================================================================
     
     @AuraEnabled(cacheable=true)
     Public Static Lead fetchLead(String recId){
@@ -317,7 +333,7 @@ public class AuraCompUtilityClas {
         return accList;
     }
     
-    // ==================================================================================================================================
+    // ==========================================================================================================================================================================
     
     // Account & their related Contacts using Aura Component
     
@@ -328,6 +344,7 @@ public class AuraCompUtilityClas {
             return accList[0];
         }catch(Exception e){
             System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'AccountwithRelatedContacts', e);
             return null;
         }
         
@@ -349,7 +366,7 @@ System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNum
 
 */
     
-    // ==================================================================================================================================
+    // ==========================================================================================================================================================================
     
     // Delete Multiple Records Using Checkbox Controller
     
@@ -373,7 +390,7 @@ System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNum
         
     }
     
-    // =================================================================================================================
+    // ==========================================================================================================================================================================
     
     // Controller Class For Custom File Upload Using Aura Components
     
@@ -395,11 +412,12 @@ System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNum
             return attach.Id;
         }catch(Exception e){
             System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'SaveFile', e);
             return null;
         }
     }
     
-     // =================================================================================================================
+    // ==========================================================================================================================================================================
     
     // Iterate map values in Salesforce Lightning component
     @AuraEnabled
@@ -412,11 +430,11 @@ System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNum
         Map1.put('SA','Dean Elagar');
         return Map1;
     }
-
-       // =================================================================================================================
-
-       // Controller for Custom Lookup 
-
+    
+    // ==========================================================================================================================================================================
+    
+    // Controller for Custom Lookup 
+    
     @AuraEnabled
     public Static List<SobjectResult> getResults(String ObjectName, String fieldName, String value){
         List<SobjectResult> SobjectResultList = new list<SobjectResult>();
@@ -442,5 +460,336 @@ System.debug('the Error ::'+e.getMessage()+' AND the Error Line ::'+e.getLineNum
             System.debug('recId ::'+recId);
         }
     }   
+    
+    // ====================================================================================================================================================================
+    
+    // Controller for Custom MultipickList Aura Component
+    
+    @AuraEnabled
+    public Static List<String> getPickListValue(){
+        List<String> picValues = new List<String>();
+        // Getting object Type from object Name. 
+        Schema.SObjectType objType = Schema.getGlobalDescribe().get('Plant__c');
+        System.debug('objType ::'+objType);
+        // Describing Sobject using its Object Type
+        Schema.DescribeSObjectResult objDescribe = objType.getDescribe();
+        System.debug('objDescribe ::'+objDescribe);
+        // getting multipicklist field information 
+        Schema.DescribeFieldResult objFieldInfo = objDescribe.fields.getMap().get('Plant_Use__c').getDescribe();
+        System.debug('objFieldInfo ::'+objFieldInfo);
+        // getting the picklist field values
+        List<Schema.PicklistEntry> pickListValues = objFieldInfo.getPicklistValues();
+        System.debug('pickListValues ::'+pickListValues);
+        for(Schema.PicklistEntry plv : pickListValues){
+            picValues.add(plv.getValue());
+        }
+        picValues.sort();
+        return picValues;
+    }
+    
+    // ========================================================================================================================================================================
+    
+    // Controller Class For Send Email Based on Contacts Gender & Contact Type whihc Related to The Account Record
+    
+    // Controller Class For All Contact Record Associated with that Given AccountId
+    // #1
+    
+    @AuraEnabled
+    public Static String GetContactBySendAccountId(String accountId, String gender, String conType){
+        try{
+            List<Account> accList = [SELECT Id,Name FROM Account WHERE Id =: accountId];
+            Set<Id> accIdSet = new Set<Id>();
+            for(Account acc : accList){
+                accIdSet.add(acc.id);
+            }
+            
+            List<Contact> conList = new List<Contact>();
+            EmailTemplate emailTempRec = new EmailTemplate();
+            conList = [SELECT Id,AccountId,Email,Phone,FirstName,Contact_Type__c,Gender__c FROM Contact WHERE Gender__c =:gender AND Contact_Type__c =: conType AND AccountId IN: accIdSet ];
+            System.debug('ConList ::'+conList);
+            emailTempRec=[Select id, Name, DeveloperName, Subject, Body, HtmlValue from EmailTemplate where Name ='Reset Password Link'];
+            List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            for(Contact con : conList){
+                con.Login_Hash_Code__c = Utility.generateRandomString();
+                
+                List<String> recipients = new List<String>();
+                recipients.add(con.Email);
+                system.debug('recipients------'+recipients);
+                mail.setToAddresses(recipients);
+                String subject = emailTempRec.Subject;
+                system.debug('subject==>'+subject);
+                String htmlBody = emailTempRec.HtmlValue;
+                System.debug('htmlBody ::'+htmlBody);
+                if( con.Login_Hash_Code__c != null)
+                    htmlBody = htmlBody.replace('{!Contact.Login_Hash_Code__c}', con.Login_Hash_Code__c);   
+                htmlBody = htmlBody.replace('{!Contact.FirstName}', con.FirstName);
+                system.debug('htmlBody==>'+htmlBody);
+                mail.setSubject(subject);
+                mail.setHtmlBody(htmlBody);
+                mails.add(mail);
+            }
+            update conList;
+            System.debug('mails==>'+mails);
+            system.debug('mails.size()==>'+mails.size());
+            Messaging.sendEmail(mails);
+            return 'SUCCESS';
+        }catch(Exception e){
+            System.debug('The Error ::'+e.getMessage() +' AND Error Line No :'+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'GetContactBySendAccountId', e);
+            return 'ERROR';
+        }
+    }
+    
+    // ==========================================================================================================================================================================
+    
+    
+    // Controller Class for Getting PickList Values by Send ObjectName & Field Name.
+    // #2
+    @AuraEnabled
+    public Static List<String> getPickListValuesMethod(String ObjectApi_name, String Field_Name){
+        List<String> lstPickvals                        = new List<String>();
+        Schema.SObjectType targetType                   = Schema.getGlobalDescribe().get(ObjectApi_name);
+        Sobject Object_name                             = targetType.newSObject();
+        Schema.sObjectType sobject_type                 = Object_name.getSObjectType(); 
+        Schema.DescribeSObjectResult sobject_describe   = sobject_type.getDescribe();
+        Map<String, Schema.SObjectField> field_map      = sobject_describe.fields.getMap();
+        List<Schema.PicklistEntry> pick_list_values     = field_map.get(Field_name).getDescribe().getPickListValues();
+        
+        for (Schema.PicklistEntry a : pick_list_values) {
+            lstPickvals.add(String.ValueOf(a.getLabel()).trim());  
+        }
+        System.debug('lstPickvals ::'+lstPickvals);
+        return lstPickvals;
+    }
+    
+    // ========================================================================================================================================================================
+    
+    // Controller For Send Email Template in Lead Record Detail Page
+    // Class # 1
+    
+    @AuraEnabled
+    Public Static String ProcessEmail(String email, String Subject, String Message){
+        System.debug('email ::'+email +' Subject ::'+Subject +' Message ::'+Message);
+        String Smessage = '';
+        try{
+            
+            Lead leadName = [SELECT Id,Name,Email FROM Lead Where Email =:email LIMIT 1];
+            System.debug('leadName ::'+leadName);
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            String [] toAddresses = new String[] {email};
+                mail.setToAddresses(toAddresses);
+            mail.setSubject(Subject);
+            String htmlBody = Message;
+            
+            htmlBody = htmlBody.replace('{!User.Name}', userinfo.getName());
+            htmlBody = htmlBody.replace('{!Lead.Name}', leadName.Name);  
+            mail.setHtmlBody(htmlBody);
+            Messaging.SendEmailResult [] results = Messaging.sendEmail(new Messaging.SingleEmailMessage[] {mail});
+            sMessage='Success';
+            Task tsk = new Task();          
+            tsk.Status = 'Completed';
+            tsk.WhoId = leadName.Id;
+            tsk.Description = 'Email sent to '+leadName.Name+' regarding '+Subject+' on '+dateTime.now();
+            tsk.Subject = 'Email sent to '+leadName.Name+' regarding '+Subject;
+            insert tsk;
+            System.debug('task ::'+tsk);
+        }catch(Exception e){
+            System.debug('The Error Message ::'+e.getMessage() +'# AND The Error Line ::'+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'ProcessEmail', e);
+        }
+        return Smessage;
+    }
+    
+    
+    
+    @AuraEnabled
+    public static emailAndEmailTemp fetchLeadDetails(String leadId){
+        System.debug('leadId ::'+leadId);
+        List<String> templateNames = new List<String>();
+        List<Email_template_Name__c> emailTemplateName = new List<Email_template_Name__c>();
+        List<EmailTemplate> emailTemplates = new List<EmailTemplate>();
+        List<Lead> leadList = New List<lead>();
+        
+        try{  
+            if(!string.isBlank(leadId)){
+                leadList = [Select id,Email From Lead Where id =:leadId limit 1 ];
+                System.debug('leadList ::'+leadList);
+            }
+            
+            emailTemplateName = [select Template_Name__c From Email_template_Name__c];
+            System.debug('emailTemplateName ::'+emailTemplateName);
+            if(!emailTemplateName.isEmpty()){
+                for(Email_template_Name__c tempName : emailTemplateName){
+                    templateNames.add(tempName.Template_Name__c);
+                    System.debug('templateNames List ::'+templateNames);
+                }  
+                if(!templateNames.isEmpty()){
+                    emailTemplates = [SELECT Body,Description,DeveloperName,HtmlValue,Name,Subject FROM EmailTemplate WHERE Name in : templateNames];
+                    System.debug('emailTemplates List ::'+emailTemplates);
+                }
+            }
+            if(!leadList.isEmpty() && !emailTemplates.isEmpty() && !templateNames.isEMpty() ){
+                emailAndEmailTemp wrap = new emailAndEmailTemp(leadList[0].Email, emailTemplates, templateNames,leadList[0]);
+                System.debug('wrap ::'+emailTemplates);
+                return wrap;
+            }
+            return null;
+        }catch(Exception e){
+            System.debug('The Error Message ::'+e.getMessage() +' # AND The Error Line ::'+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'fetchLeadDetails', e);
+            return null;
+        }
+    }
+    public class emailAndEmailTemp{
+        @auraEnabled
+        public String Email;
+        @auraEnabled 
+        public List<EmailTemplate> emailTemplateList;
+        @auraEnabled
+        public List<String> emailTemplateName;
+        @auraEnabled
+        public Lead leadRec;
+        
+        public emailAndEmailTemp(String Email, List<EmailTemplate> emailTemplateList,List<String> emailTemplateName, Lead leadRec){
+            this.Email = Email;
+            this.emailTemplateList = emailTemplateList;
+            this.emailTemplateName = emailTemplateName;
+            this.leadRec = leadRec;
+        }
+        
+    }
+    
+    // ==========================================================================================================================================================================
+    
+    // Controller To Find Account Related Contact, Opportunity & Lead Record
+    
+    @AuraEnabled
+    public Static Account getAccountRecord(String AccountIdToPass){
+        Account acc = [SELECT Id,Name,Email__c,Phone FROM Account Where Id = :AccountIdToPass LIMIT 1];
+        System.debug('acc Details ::'+acc);
+        return acc;
+    }
+    
+    @AuraEnabled
+    public Static List<Contact> getAccountRelatedContact(String AccId){
+        List<Contact> conList = [SELECT Id,Name,Email,Phone,AccountId FROM Contact WHERE AccountId =: AccId];
+        System.debug('conList Details ::'+conList);
+        return conList;
+    }
+    
+    @AuraEnabled
+    public Static List<Opportunity> getAccountRelatedOpportunity(String accId){
+        List<Opportunity> oppList = [SELECT Id,Name,Email__c,StageName,CloseDate,AccountId FROM Opportunity WHERE AccountId =: accId ];
+        System.debug('oppList Details ::'+oppList);
+        return oppList;
+    }
+    
+    @AuraEnabled
+    public Static List<Lead> getOpportunityRelatedLead(String OppId){
+        List<Lead> leadList = [SELECT Id,Name,Email,Opportunity__c,Company FROM Lead WHERE Opportunity__c =: OppId];
+        System.debug('leadList Details ::'+leadList);
+        return leadList;
+    }
+    
+    // ============================================================================================================================================================
+    
+    // Controller for Lightning Loading Spinner & Account Related Contacts & Redirect to Contact Detail Page
+    @AuraEnabled
+    public Static List<Contact> conListDatFromApex(String accId){
+        List<Contact> getConList = new List<Contact>();
+        List<Contact> conLoopList = [SELECT Id,Name,Email,Phone, AccountId FROM Contact WHERE  AccountId =:accId LIMIT 10];
+        for(Contact  con : conLoopList){
+            if(con.id !=null){
+                getConList.add(con);
+            }
+        }
+        System.debug('getConList ::'+getConList.size());
+        return getConList;
+    }
+    
+    // ============================================================================================================================================================
+    
+    // Controller for RecordType Aura Component & this comp is added to the Quick Action in Lead Record Detail Page.
+    // Class #1
+    public static Map<Id,String> recordTypeMap {get;set;}
+    
+    @AuraEnabled
+    public Static List<String> fetchRecordTypeValues(){
+        List<Schema.RecordTypeInfo> recordTypes = Lead.SobjectType.getDescribe().getRecordTypeInfos();
+        System.debug('recordTypes ::'+recordTypes);
+        recordTypeMap = new Map<Id,String>();
+        for(RecordTypeInfo rt : recordTypes){
+            if(rt.getName() != 'Master'){
+                recordTypeMap.put(rt.getRecordTypeId(), rt.getName());
+                System.debug('recordTypeMap Loop ::'+recordTypeMap);
+            }
+        }
+        
+        return recordTypeMap.values();
+    }
+    
+    // Class #2
+    @AuraEnabled
+    public static Id getRecordTypeId(String recordTypeLabel){
+        Id recId = Schema.SObjectType.Lead.getRecordTypeInfosByName().get(recordTypeLabel).getRecordTypeId();
+        System.debug('recId  ::'+recId);
+        return recId;
+    }
+    
+    // ============================================================================================================================================================
+    // Controller for Wrapper Class In Lightning Component -Inner Class, Aura Component.
+    
+    @AuraEnabled
+    public Static wrapperClass getDataFromWrapper(){
+        wrapperClass wrap = new wrapperClass();
+        wrap.conList = [SELECT Id,Name,Phone,Email FROM Contact WHERE Email !=null AND Phone !=null LIMIT 10];
+        wrap.contactCount = wrap.conList.size();
+        wrap.message = 'Wrapper Class in  Aura Comp';
+        return wrap;
+    }
+    
+    public class wrapperClass{
+        @AuraEnabled
+        public List<Contact> conList {get;set;}
+        @AuraEnabled
+        public Integer contactCount {get;set;}
+        @AuraEnabled
+        public String message {get;set;}
+    }
+    
+    // ============================================================================================================================================================
+    // Display data from inner SOQL Query in lightning component
+    @AuraEnabled
+    public Static List<Account> getAccountRelatedContactList(){
+        List<Account> accList = [SELECT Id,Name,(SELECT Id,Name FROM Contacts) FROM Account LIMIT 10];
+        return accList;
+    }
+    
+    // ============================================================================================================================================================
+    // Controller for Fetch Picklist value from sObject and Set in ui:inputSelect 
+    
+    @AuraEnabled
+    public Static List<String> getPicklitValueFromSobject(Sobject objObject , String fld){
+        system.debug('objObject --->' + objObject);
+        system.debug('fieldName --->' + fld);
+        try{
+            List<String> allPickValues = new List<String>();
+            Schema.SObjectType SobjType = objObject.getSObjectType();
+            Schema.DescribeSObjectResult objDescribe = SobjType.getDescribe();
+            Map<String, Schema.SObjectField> fieldMap = objDescribe.fields.getMap();
+            List<Schema.PicklistEntry> pickListValues =  fieldMap.get(fld).getDescribe().getPickListValues();
+            for(Schema.PicklistEntry pic : pickListValues){
+                allPickValues.add(pic.getValue());
+            }
+            System.debug('allPickValues ::'+allPickValues);
+            allPickValues.sort();
+            return allPickValues;
+        }catch(Exception e){
+            System.debug('The Error Message ::'+e.getMessage() +'# AND The Error Line ::'+e.getLineNumber());
+            HandleException.CreateErrorMsg('AuraCompUtilityClas', 'getPicklitValueFromSobject', e);
+        }
+        return null;
+    }
     
 }

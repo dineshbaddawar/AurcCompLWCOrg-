@@ -13,7 +13,7 @@
                 
                 <p>  <b>Lightnig Flow</b></p>
                 <p><b>Reports and Dashboard</b></p>
-                <p>   <b>Chain Sdt</b></p>
+                <p>   <b>Chain Set</b></p>
             </lightning:tab>  
             
             <lightning:tab label="Service Cloud" aura:id="tab3" tabindex="3" id="tab3" title="Service Cloud">

@@ -4,11 +4,6 @@
     <description>Default Lightning Platform site footer component</description>
     <label>SiteFooter</label>
     <packageVersions>
-        <majorNumber>4</majorNumber>
-        <minorNumber>7</minorNumber>
-        <namespace>Tigerface1</namespace>
-    </packageVersions>
-    <packageVersions>
         <majorNumber>1</majorNumber>
         <minorNumber>7</minorNumber>
         <namespace>sf_com_apps</namespace>

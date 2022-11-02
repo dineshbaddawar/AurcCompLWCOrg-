@@ -1,7 +1,7 @@
 ({
     searchField : function(component, event, helper) {
         debugger;
-        alert("searchField Method Called")
+      //  alert("searchField Method Called")
         var currentText = event.getSource().get("v.value");
         var resultBox = component.find("resultBox");
         component.set("v.LoadingText", true);
@@ -43,7 +43,7 @@
     
     setSelectedRecord : function(component, event, helper) {
         debugger;
-        alert("setSelectedRecord Method Called")
+      //  alert("setSelectedRecord Method Called")
         var currentText = event.currentTarget.id;
         var resultBox = component.find('resultBox');
         $A.util.removeClass(resultBox, 'slds-is-open');
@@ -54,7 +54,7 @@
     
     resetData : function(component, event, helper) {
         debugger;
-        alert("resetData Method Called")
+      //  alert("resetData Method Called")
         component.set("v.selectedRecordName",'');
         component.set("v.selectedRecordId","");
         component.find("userinput").set("v.readonly",false);

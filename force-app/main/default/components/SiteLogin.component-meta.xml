@@ -4,11 +4,6 @@
     <description>Default Salesforce Sites Login component</description>
     <label>SiteLogin</label>
     <packageVersions>
-        <majorNumber>4</majorNumber>
-        <minorNumber>7</minorNumber>
-        <namespace>Tigerface1</namespace>
-    </packageVersions>
-    <packageVersions>
         <majorNumber>1</majorNumber>
         <minorNumber>7</minorNumber>
         <namespace>sf_com_apps</namespace>

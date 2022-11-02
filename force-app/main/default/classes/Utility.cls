@@ -22,4 +22,25 @@ public class Utility {
         }
         return randStr+string.ValueOf(system.now().getTime()); 
     }
+    
+    // =============================================================================================================================================================
+    // Account Related Contacts Select OPtion in Aura Comp
+    
+    // Class #1 : get All Account records
+    @AuraEnabled
+    public Static List<Account> getAllAccountsList(){
+        List<Account> accList = [SELECT Id,Name,Site FROM Account WHERE Site ='salesforce.com'];
+        return accList;
+    }
+    
+    
+    // Class #2 : Get Contact Related Account Using AccountId
+    @AuraEnabled
+    public Static List<Contact> getAccountRelatedContacts (String AccId){
+        List<Contact> conList = [SELECT Id,Name,AccountId FROM Contact WHERE AccountId =: accId];
+        for(Contact con : conList){
+            System.debug('Contacts Name :::'+con.Name);
+        }
+        return conList;
+    }
 }

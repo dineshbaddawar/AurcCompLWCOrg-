@@ -5,7 +5,7 @@
             
             
             <c:Libraries ></c:Libraries>
-            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+           
             <style>
                 body {
                 background: rgb(93, 186, 248);

@@ -6,11 +6,6 @@
     <description>Default Lightning Platform In Maintenance page</description>
     <label>InMaintenance</label>
     <packageVersions>
-        <majorNumber>4</majorNumber>
-        <minorNumber>7</minorNumber>
-        <namespace>Tigerface1</namespace>
-    </packageVersions>
-    <packageVersions>
         <majorNumber>1</majorNumber>
         <minorNumber>7</minorNumber>
         <namespace>sf_com_apps</namespace>
